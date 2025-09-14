@@ -1,0 +1,27 @@
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: webapp-deployment
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: webapp
+      template:
+        metadata:
+          labels:
+            app: webapp
+        spec:
+          containers:
+          - name: webapp-container
+            image: hashicorp/http-echo
+            args:
+              - "-text=$(NODE_NAME)"
+            env:
+              - name: NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+            ports:
+            - containerPort: 5678
+

@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  core:
+    image: stenote/nginx-hostname
+    ports:
+      - 80:80
+    deploy:
+      mode: replicated
+      replicas: 2

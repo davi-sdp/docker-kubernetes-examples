@@ -1,0 +1,19 @@
+
+services:
+  backweb:
+    image: stenote/nginx-hostname
+    #ports:
+     # - 80:80
+    deploy:
+      mode: replicated
+      replicas: 2
+    restart: always
+      
+  frontweb:
+    build: ./nginx
+    ports:
+    - '80:80'
+    depends_on:
+    - backweb
+    restart: always
+
